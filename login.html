@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔑 Login to Study Planner</h1>
+
+    <form id="loginForm">
+      <!-- changed from email to username -->
+      <input type="text" id="username" placeholder="Enter your username" required>
+      <input type="password" id="password" placeholder="Enter your password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="loginMessage" style="color:red; text-align:center;"></p>
+
+    <!-- ✅ Step 2: Signup link -->
+    <p style="text-align:center;">
+      Don’t have an account? <a href="signup.html">Sign up here</a>
+    </p>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const message = document.getElementById("loginMessage");
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let username = document.getElementById("username").value.trim();
+      let password = document.getElementById("password").value.trim();
+
+      let storedPassword = localStorage.getItem(username);
+
+      if (storedPassword && storedPassword === password) {
+        // save login session
+        localStorage.setItem("loggedInUser", username);
+        window.location.href = "index.html";
+      } else {
+        message.textContent = "❌ Invalid username or password.";
+      }
+    });
+  </script>
+</body>
+</html>
