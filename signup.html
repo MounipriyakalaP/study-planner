@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Create Your Account</h1>
+
+    <form id="signupForm">
+      <input type="text" id="newUsername" placeholder="Choose a username" required>
+      <input type="password" id="newPassword" placeholder="Choose a password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p id="signupMessage" style="text-align:center; color:red;"></p>
+    <p style="text-align:center;">
+      Already have an account? <a href="login.html">Login here</a>
+    </p>
+  </div>
+
+  <script>
+    const signupForm = document.getElementById("signupForm");
+    const signupMessage = document.getElementById("signupMessage");
+
+    signupForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let username = document.getElementById("newUsername").value.trim();
+      let password = document.getElementById("newPassword").value.trim();
+
+      if (localStorage.getItem(username)) {
+        signupMessage.textContent = "⚠️ Username already exists. Choose another.";
+      } else {
+        localStorage.setItem(username, password);
+        signupMessage.style.color = "green";
+        signupMessage.textContent = "✅ Account created! You can now log in.";
+      }
+    });
+  </script>
+</body>
+</html>
